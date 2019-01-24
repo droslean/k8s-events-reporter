@@ -1,0 +1,18 @@
+email_settings:
+    smtp_server: smtp.mailtrap.io
+    port: 2525
+    username: b71bcd91fd49e1
+    password: 06f15ab9c7c3aa
+reports:
+  started_pods:
+    email_recipients: ["test@test.com"]
+    description: Started pods
+    kind: Pod
+    reasons: ["Created","Started"]
+    interval: 10s 
+  replicaset:
+    email_recipients: ["test@test.com"]
+    description: ReplicaSets Created & Deleted
+    kind: ReplicaSet
+    reasons: ["SuccessfulCreate","SuccessfulDelete"]
+    interval: 14s    

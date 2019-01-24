@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: events-reporter
+  labels:
+    app: events-reporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: events-reporter
+  template:
+    metadata:
+      labels:
+        app: events-reporter
+    spec:
+      serviceAccount: events-viewer
+      containers:
+      - name: events-reporter
+        image: events-reporter
+        imagePullPolicy: Never
+        command: 
+        - events-reporter
+        args:
+        - --config-path=/etc/config/config.yaml
+        volumeMounts:
+          - name: config-vol
+            mountPath: /etc/config
+      volumes:
+        - name: config-vol
+          configMap:
+            name: events-reporter-config
